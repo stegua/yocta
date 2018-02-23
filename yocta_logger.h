@@ -1,16 +1,13 @@
 /**
-* @fileoverview Copyright (c) 2017,2018, by Stefano Gualandi, UniPv,
-*               via Ferrata, 1, Pavia, Italy, 27100
+* @fileoverview Copyright (c) 2017,2018, by Stefano Gualandi
 *
 * @author stefano.gualandi@gmail.com (Stefano Gualandi)
-*
 */
 
 #include <string>
 #include <cstdio>
 #include <cstdlib>
 #include <chrono>
-#include <ctime>
 #include <memory>
 
 // In order to use PRId64

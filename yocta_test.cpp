@@ -1,9 +1,7 @@
 /**
-* @fileoverview Copyright (c) 2018, by Stefano Gualandi,
-*               via Ferrata, 1, Pavia, Italy, 27100
+* @fileoverview Copyright (c) 2018, by Stefano Gualandi
 *
 * @author stefano.gualandi@gmail.com (Stefano Gualandi)
-*
 */
 
 #include <cstdio>
