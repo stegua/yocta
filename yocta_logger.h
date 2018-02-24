@@ -20,6 +20,18 @@ namespace yocta {
 // (for real, please, read the following link)
 // Wikipedia: https://en.wikipedia.org/wiki/Yocto-
 
+
+// Support for forwarding the content of fprintf to my logger class
+// From Stackoverflow at:
+// https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
+template<typename ... Args>
+std::string fmt(const std::string& format, Args ... args) {
+   size_t size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
+   std::unique_ptr<char[]> buf(new char[size]);
+   snprintf(buf.get(), size, format.c_str(), args ...);
+   return std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
+}
+
 // Verbosity levels
 enum VerbosityLevel { ERROR = 0, WARN = 1, NOTE = 2, INFO = 3, DEBUG = 4 };
 
@@ -61,32 +73,40 @@ class Logger {
       fflush(stream);
    }
    // ---- Dump message functions ---- //
-   void error(const std::string& message) const {
-      dump("[ERROR]", message);
+   // Note this question and answer:
+   // https://stackoverflow.com/questions/20588191/error-with-variadiac-template-parameter-pack-must-be-expanded
+
+   template<typename ... Args>
+   void error(const std::string& format, Args ... args) const {
+      dump("[ERROR]", fmt(format, std::forward<Args>(args)...));
       // Flush right away for errors
       fflush(stream);
    }
 
-   void warn(const std::string& message) const {
+   template<typename ... Args>
+   void warn(const std::string& format, Args ... args) const {
       if (vl >= VerbosityLevel::WARN)
-         dump("[WARN ]", message);
+         dump("[WARN ]", fmt(format, std::forward<Args>(args)...));
    }
 
-   void note(const std::string& message) const {
+   template<typename ... Args>
+   void note(const std::string& format, Args ... args) const {
       if (vl >= VerbosityLevel::NOTE)
-         dump("[NOTE ]", message);
+         dump("[NOTE ]", fmt(format, std::forward<Args>(args)...));
       // Flush right away for errors
       fflush(stream);
    }
 
-   void info(const std::string& message) const {
+   template<typename ... Args>
+   void info(const std::string& format, Args ... args) const {
       if (vl >= VerbosityLevel::INFO)
-         dump("[INFO ]", message);
+         dump("[INFO ]", fmt(format, std::forward<Args>(args)...));
    }
 
-   void debug(const std::string& message) const {
+   template<typename ... Args>
+   void debug(const std::string& format, Args ... args) const {
       if (vl >= VerbosityLevel::DEBUG)
-         dump("[DEBUG]", message);
+         dump("[DEBUG]", fmt(format, std::forward<Args>(args)...));
    }
 
  private:
@@ -114,17 +134,5 @@ class Logger {
       fprintf(stream, "%s.%.3" PRId64 " %s %s\n", date, milli.count(), msg, message.c_str());
    }
 };
-
-
-// Support for forwarding the content of fprintf to my logger class
-// From Stackoverflow at:
-// https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
-template<typename ... Args>
-std::string fmt(const std::string& format, Args ... args) {
-   size_t size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
-   std::unique_ptr<char[]> buf(new char[size]);
-   snprintf(buf.get(), size, format.c_str(), args ...);
-   return std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
-}
 
 } // End namespace Yocto
