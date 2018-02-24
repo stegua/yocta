@@ -4,8 +4,6 @@
 * @author stefano.gualandi@gmail.com (Stefano Gualandi)
 */
 
-#include <cstdio>
-
 #include "yocta_logger.h"
 
 int main(int argc, char* argv[]) {
