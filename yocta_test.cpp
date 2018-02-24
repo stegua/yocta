@@ -11,14 +11,14 @@
 int main(int argc, char* argv[]) {
    // Log to console (stdout)
    yocta::Logger logger;
-   logger.info(yocta::fmt("test %d, %f, %s", 12, 0.3, "hello"));
-   logger.error(yocta::fmt("try %d, %f, %s", 12, 0.3, "world"));
+   logger.info(yocta::fmt("let %d, %f, %s", 12, 0.1, "hello"));
+   logger.error(yocta::fmt("try %d, %f, %s", 12, 0.2, "world"));
 
-   // Lgo to the file "prova.log"
-   yocta::Logger fileLogger("prova.log");
-   fileLogger.setVerbosityLevel(yocta::VerbosityLevel::WARN);
-   fileLogger.info(yocta::fmt("your %d, %f, %s", 12, 0.3, "world"));
-   fileLogger.error(yocta::fmt("log %d, %f, %s", 12, 0.3, "hello"));
+   // Log to the file "prova.log"
+   logger.setFileStream("prova.log");
+   logger.setVerbosityLevel(yocta::VerbosityLevel::WARN);
+   logger.info(yocta::fmt("log %d, %f, %s", 12, 0.3, "world"));
+   logger.error(yocta::fmt("yct %d, %f, %s", 12, 0.4, "hello"));
 
    return EXIT_SUCCESS;
 }

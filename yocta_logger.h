@@ -5,21 +5,23 @@
 */
 
 #include <string>
-#include <cstdio>
-#include <cstdlib>
 #include <chrono>
 #include <memory>
+
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 
 // In order to use PRId64
 #include <inttypes.h>
 
-
 namespace yocta {
-// Why Yocto? Please, read the following link:
+// Why Yocto? Miss Yocta Geek is the girlfriend of mister Yocto
+// (for real, please, read the following link)
 // Wikipedia: https://en.wikipedia.org/wiki/Yocto-
 
 // Verbosity levels
-enum VerbosityLevel { ERROR = 0, WARN = 1, INFO = 2, DEBUG = 3 };
+enum VerbosityLevel { ERROR = 0, WARN = 1, NOTE = 2, INFO = 3, DEBUG = 4 };
 
 class Logger {
  public:
@@ -35,6 +37,20 @@ class Logger {
       fflush(stream);
       if (stream != stdout)
          std::fclose(stream);
+   }
+
+   // Rule of five: Move constructor
+   Logger(Logger&& o)
+      : stream(o.stream), vl(o.vl)
+   {}
+   // Deleted constructor (this is a singleton object)
+   Logger(const Logger& o) = delete;
+   Logger &operator=(const Logger&) = delete;
+   Logger &operator=(Logger&&) = delete;
+
+   // Set file stream
+   void setFileStream(const std::string& filename) {
+      stream = std::fopen(filename.c_str(), "w");
    }
    // Set verbosity level
    void setVerbosityLevel(VerbosityLevel verbosity) {
@@ -54,6 +70,13 @@ class Logger {
    void warn(const std::string& message) const {
       if (vl >= VerbosityLevel::WARN)
          dump("[WARN ]", message);
+   }
+
+   void note(const std::string& message) const {
+      if (vl >= VerbosityLevel::NOTE)
+         dump("[NOTE ]", message);
+      // Flush right away for errors
+      fflush(stream);
    }
 
    void info(const std::string& message) const {
@@ -78,7 +101,7 @@ class Logger {
       using namespace std::chrono;
       // get current time
       auto now = system_clock::now();
-      std::time_t now_time = system_clock::to_time_t(now);
+      time_t now_time = system_clock::to_time_t(now);
       // get datetime
       char date[100];
       strftime(date, sizeof(date), "%Y-%m-%d %H:%M:%S", localtime(&now_time));

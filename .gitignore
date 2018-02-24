@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/msvc/Yocta/.vs/Yocta/v15
+/msvc/Yocta/x64/Release
+/yct
+/prova.log
