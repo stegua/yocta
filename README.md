@@ -38,7 +38,8 @@ $ more prova.log
 $ 
 ```
 
-### Compiler supported
+### Compilers supported
+The following compilers are currently supported:
 
 * clang
 * gcc
