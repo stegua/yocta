@@ -23,9 +23,12 @@ int main(int argc, char* argv[]) {
    return EXIT_SUCCESS;
 }
 ```
-
-The previous code will give as ouput:
-
+In order to compile and run the basic `yocta_test` on Linux:
+```
+$ make
+$ make test
+``` 
+The output of the test will be as follows:
 ```
 $ ./yct
 2018-02-24 21:49:08.805 [INFO ] let 12, 0.100000, hello
@@ -34,3 +37,9 @@ $ more prova.log
 2018-02-24 21:49:08.806 [NOTE ] yct 12, 0.40, hello
 $ 
 ```
+
+### Compiler supported
+
+* clang
+* gcc
+* MSVC 2017
