@@ -1,7 +1,7 @@
 # yocta
 Modern C++ minimalist utilities
 
-[https://ci.appveyor.com/api/projects/status/github/yocta?branch=master&svg=true](https://ci.appveyor.com/api/projects/status/github/yocta?branch=master&svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/d2jnxclg20vd0o50?svg=true)](https://ci.appveyor.com/project/stegua/yocta)
 
 
 ## Usage Example
