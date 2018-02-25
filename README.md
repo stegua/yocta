@@ -1,6 +1,9 @@
 # yocta
 Modern C++ minimalist utilities
 
+[https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
+
+
 ## Usage Example
 ```c++
 #include "yocta_logger.h"
