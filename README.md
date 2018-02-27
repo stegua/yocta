@@ -1,7 +1,7 @@
 # yocta
 Modern C++ minimalist utilities
 
-[![Build status](https://ci.appveyor.com/api/projects/status/d2jnxclg20vd0o50?svg=true)](https://ci.appveyor.com/project/stegua/yocta)
+[![Build Status](https://travis-ci.org/stegua/dotlib.svg?branch=master)](https://travis-ci.org/stegua/yocta) [![Build status](https://ci.appveyor.com/api/projects/status/d2jnxclg20vd0o50?svg=true)](https://ci.appveyor.com/project/stegua/yocta)
 
 
 ## Usage Example
@@ -23,9 +23,12 @@ int main(int argc, char* argv[]) {
    return EXIT_SUCCESS;
 }
 ```
-
-The previous code will give as ouput:
-
+In order to compile and run the basic `yocta_test` on Linux:
+```
+$ make
+$ make test
+``` 
+The output of the test will be as follows:
 ```
 $ ./yct
 2018-02-24 21:49:08.805 [INFO ] let 12, 0.100000, hello
@@ -34,3 +37,33 @@ $ more prova.log
 2018-02-24 21:49:08.806 [NOTE ] yct 12, 0.40, hello
 $ 
 ```
+
+### Compilers supported
+The following compilers are currently supported:
+
+* clang
+* gcc
+* MSVC 2017
+
+
+
+### MIT License
+Copyright (c) 2018 Stefano Gualandi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
